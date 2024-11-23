@@ -16,8 +16,11 @@ const AuthLogin = ({ sendAuthInfo, onProcessLogin }) => {
     onProcessLogin(authInfo);
   };
   useEffect(() => {
-    console.log("AuthLogin - Component");
-    setAuthInfo(sendAuthInfo);
+    if (sendAuthInfo) {
+      setAuthInfo(sendAuthInfo);
+    } else {
+      setAuthInfo(sendAuthInfo);
+    }
   }, [sendAuthInfo]);
   return (
     <>

@@ -77,7 +77,6 @@ const Bill = ({
 
   useEffect(() => {
     if (sendPosBill) {
-      console.log(sendPosBill);
       setCurrentBill(sendPosBill);
       const _totalAmount = calculateTotalAmount(
         sendPosBill?.items,
@@ -220,7 +219,10 @@ const Bill = ({
                   <Button
                     variant="success"
                     onClick={onCreateBill}
-                    disabled={!currentBill?.customer?.name || currentBill?.items.length === 0}
+                    disabled={
+                      !currentBill?.customer?.name ||
+                      currentBill?.items.length === 0
+                    }
                   >
                     <FiFileText style={{ marginTop: "-2px" }} /> Create Bill
                   </Button>

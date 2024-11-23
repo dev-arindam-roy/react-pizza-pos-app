@@ -21,9 +21,13 @@ const ProductItems = ({ sendProductList, onAddPosItem }) => {
     }
   }, [searchTerm]);
   useEffect(() => {
-    console.log(sendProductList);
-    setProducts(sendProductList);
-    setCopyProducts(sendProductList);
+    if (sendProductList) {
+      setProducts(sendProductList);
+      setCopyProducts(sendProductList);
+    } else {
+      setProducts([]);
+      setCopyProducts([]);
+    }
   }, [sendProductList]);
   return (
     <>

@@ -81,6 +81,7 @@ const PosContainer = () => {
   const emitOnLogoutHandler = () => {
     const _deepCopyAuthObj = JSON.parse(JSON.stringify(authObj));
     setAuthDetails(_deepCopyAuthObj);
+    emitOnCancelBillHandler();
     localStorage.setItem(
       lsKey + "_auth_info_",
       JSON.stringify(_deepCopyAuthObj)
@@ -256,16 +257,25 @@ const PosContainer = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const _tempPosBill = { ...posBill };
-        _tempPosBill.discount = parseFloat(discountAmount).toFixed(2);
         const _billItems = _tempPosBill.items;
-        _tempPosBill.amount = calculateTotalBill(_billItems, discountAmount);
-        billSaveToLocalStorage(_tempPosBill);
-        setPosBill(_tempPosBill);
-        if (discountAmount > 0) {
+        if (parseFloat(calculateTotalBill(_billItems)) >= discountAmount) {
+          _tempPosBill.discount = parseFloat(discountAmount).toFixed(2);
+          _tempPosBill.amount = calculateTotalBill(_billItems, discountAmount);
+          billSaveToLocalStorage(_tempPosBill);
+          setPosBill(_tempPosBill);
+          if (discountAmount > 0) {
+            Swal.fire({
+              icon: "success",
+              title: "Done!",
+              text: "Discount has been applied successfully!",
+              showConfirmButton: true,
+            });
+          }
+        } else {
           Swal.fire({
-            icon: "success",
-            title: "Done!",
-            text: "Discount has been applied successfully!",
+            icon: "error",
+            title: "Oops!",
+            text: "Discount is grater than total bill amount!",
             showConfirmButton: true,
           });
         }
@@ -304,6 +314,9 @@ const PosContainer = () => {
     itemQuantities,
     discount = 0
   ) => {
+    if (!discount || discount === "" || discount === 0) {
+      discount = parseFloat(0).toFixed(2);
+    }
     Swal.fire({
       title: "Are you sure?",
       text: `You want to update the current bill ?`,
@@ -330,15 +343,31 @@ const PosContainer = () => {
         });
         _tempPosBill.items = _tempPosBillItems;
         _tempPosBill.discount = parseFloat(discount).toFixed(2);
-        _tempPosBill.amount = calculateTotalBill(_tempPosBill.items, discount);
-        setPosBill(_tempPosBill);
-        billSaveToLocalStorage(_tempPosBill);
-        Swal.fire({
-          icon: "success",
-          title: "Done!",
-          text: "Bill has been updated successfully!",
-          showConfirmButton: true,
-        });
+        if (parseFloat(calculateTotalBill(_tempPosBill.items)) >= _tempPosBill.discount) {
+          _tempPosBill.amount = calculateTotalBill(
+            _tempPosBill.items,
+            discount
+          );
+          setPosBill(_tempPosBill);
+          billSaveToLocalStorage(_tempPosBill);
+          Swal.fire({
+            icon: "success",
+            title: "Done!",
+            text: "Bill has been updated successfully!",
+            showConfirmButton: true,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops!",
+            text: "Discount is grater than total bill amount!",
+            showConfirmButton: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          });
+        }
       }
     });
   };

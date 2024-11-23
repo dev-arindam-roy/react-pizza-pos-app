@@ -16,7 +16,7 @@ const GeneratePosBill = ({
   onCloseCreateateBillModal,
   sendPosBill,
   sendAuthDetails,
-  onPaymentReceivedOrderClose
+  onPaymentReceivedOrderClose,
 }) => {
   const [isTheModalShow, setIsTheModalShow] = useState(false);
   const [getAuthInfo, setGetAuthInfo] = useState(null);
@@ -278,9 +278,7 @@ const GeneratePosBill = ({
                 <Button
                   type="button"
                   variant="success"
-                  onClick={() =>
-                    onPaymentReceivedOrderClose(finalBill)
-                  }
+                  onClick={() => onPaymentReceivedOrderClose(finalBill)}
                 >
                   <FiArrowRight style={{ marginTop: "-2px" }} /> Payment
                   Received & Order Close

@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 const AuthInfo = ({ sendAuthInfo }) => {
   const [authInfo, setAuthInfo] = useState(null);
   useEffect(() => {
-    setAuthInfo(sendAuthInfo);
+    if (sendAuthInfo) {
+      setAuthInfo(sendAuthInfo);
+    } else {
+      setAuthInfo(null);
+    }
   }, [sendAuthInfo]);
   return (
     <>

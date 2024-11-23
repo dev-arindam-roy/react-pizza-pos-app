@@ -26,11 +26,13 @@ const AuthSettings = ({
     onsettingsSaveChanges(authInfo);
   };
   useEffect(() => {
-    console.log("AuthSettings - Component L1");
-    setAuthInfo(sendAuthInfo);
+    if (sendAuthInfo) {
+      setAuthInfo(sendAuthInfo);
+    } else {
+      setAuthInfo(null);
+    }
   }, [sendAuthInfo]);
   useEffect(() => {
-    console.log("AuthSettings - Component L2");
     setIsModalShow(sendIsSettingModalShow);
   }, [sendIsSettingModalShow]);
   return (

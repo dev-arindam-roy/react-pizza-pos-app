@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/react-pizza-pos-app/static/css/main.cdc1b880.css",
+    "main.js": "/react-pizza-pos-app/static/js/main.a333e175.js",
+    "static/js/453.49d8d6bd.chunk.js": "/react-pizza-pos-app/static/js/453.49d8d6bd.chunk.js",
+    "static/media/1.png": "/react-pizza-pos-app/static/media/1.860e0ddadd5e25318e8e.png",
+    "static/media/4.png": "/react-pizza-pos-app/static/media/4.794c70a56efb4b19e949.png",
+    "static/media/3.png": "/react-pizza-pos-app/static/media/3.516b39c205d953127b0d.png",
+    "static/media/2.png": "/react-pizza-pos-app/static/media/2.220a1cb98a26b6757dd4.png",
+    "index.html": "/react-pizza-pos-app/index.html",
+    "main.cdc1b880.css.map": "/react-pizza-pos-app/static/css/main.cdc1b880.css.map",
+    "main.a333e175.js.map": "/react-pizza-pos-app/static/js/main.a333e175.js.map",
+    "453.49d8d6bd.chunk.js.map": "/react-pizza-pos-app/static/js/453.49d8d6bd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cdc1b880.css",
+    "static/js/main.a333e175.js"
+  ]
+}
